@@ -24,7 +24,7 @@ FIRST Download
 
 8. Please replace your .env.example to .env and paste your Access Token  in `IPINFO_API_KEY` variable
 
-7.Run the script http://localhost/librarysystem
+9.Run the script http://localhost/librarysystem
 
 Email: sample@gmail.com
 Password: 123
