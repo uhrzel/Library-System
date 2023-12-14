@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `admin` (
   `admin_id` int(11) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `username` varchar(24) NOT NULL,
   `password` varchar(255) NOT NULL,
   `firstname` varchar(30) NOT NULL,
@@ -41,8 +42,8 @@ CREATE TABLE `admin` (
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`admin_id`, `username`, `password`, `firstname`, `middlename`, `lastname`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Administrator', '', '');
+INSERT INTO `admin` (`admin_id`,  `email`,`username`, `password`, `firstname`, `middlename`, `lastname`) VALUES
+(1, 'arzeljrz17@gmail.com', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Administrator', '', '');
 
 -- --------------------------------------------------------
 

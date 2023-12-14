@@ -1,6 +1,7 @@
 <?php
 require_once 'connect.php';
 if (isset($_POST['save_admin'])) {
+	$email = $_POST['email'];
 	$username = $_POST['username'];
 	$password = md5($_POST['password']);
 	$firstname = $_POST['firstname'];
@@ -16,7 +17,7 @@ if (isset($_POST['save_admin'])) {
 				</script>
 			';
 	} else {
-		$conn->query("INSERT INTO `admin` VALUES('', '$username', '$password', '$firstname', '$middlename', '$lastname')") or die(mysqli_error());
+		$conn->query("INSERT INTO `admin` VALUES('','$email', '$username', '$password', '$firstname', '$middlename', '$lastname')") or die(mysqli_error());
 		echo '
 				<script type = "text/javascript">
 					alert("Successfully saved data");

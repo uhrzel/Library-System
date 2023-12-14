@@ -23,7 +23,7 @@ $captchaCode = $_SESSION['captcha_code'];
 			margin-bottom: 20px;
 		}
 
-		.username {
+		.email {
 			display: block;
 			font-size: 16px;
 			margin-bottom: 5px;
@@ -57,9 +57,9 @@ $captchaCode = $_SESSION['captcha_code'];
 			<h4>Login Here..</h4>
 			<hr style="border:1px solid #d3d3d3; width:100%;" />
 			<form enctype="multipart/form-data">
-				<div id="username_warning" class="form-group">
-					<label class="control-label">Username:</label>
-					<input type="text" class="form-control" id="username" />
+				<div id="email_warning" class="form-group">
+					<label class="control-label">Email:</label>
+					<input type="text" class="form-control" id="email" />
 				</div>
 				<div id="password_warning" class="form-group">
 					<label class="control-label">Password:</label>
@@ -105,7 +105,7 @@ $captchaCode = $_SESSION['captcha_code'];
 			'<center><label class="text-danger">Please fill up the form</label></center>'
 		);
 		$error1 = $(
-			'<center><label class="text-danger">Invalid username, password, or CAPTCHA</label></center>'
+			'<center><label class="text-danger">Invalid email, password, or CAPTCHA</label></center>'
 		);
 		$error2 = $(
 			'<center><label class="text-danger">Incorrect CAPTCHA</label></center>'
@@ -115,8 +115,8 @@ $captchaCode = $_SESSION['captcha_code'];
 			$error.remove();
 			$error1.remove();
 			$error2.remove();
-			$("#username").focus(function() {
-				$("#username_warning").each(function() {
+			$("#email").focus(function() {
+				$("#email_warning").each(function() {
 					$(this).removeClass("has-error has-feedback");
 					$(this).find("span").remove();
 				});
@@ -134,18 +134,18 @@ $captchaCode = $_SESSION['captcha_code'];
 				});
 			});
 
-			$username = $("#username").val();
+			$email = $("#email").val();
 			$password = $("#password").val();
 			$enteredCaptcha = $("#captchaInput").val();
 			$generatedCaptcha = $("#captcha").attr("placeholder");
 
-			if ($username == "" || $password == "" || $enteredCaptcha == "") {
+			if ($email == "" || $password == "" || $enteredCaptcha == "") {
 				$error.appendTo("#result");
-				if ($username == "") {
-					$("#username_warning").addClass("has-error has-feedback");
+				if ($email == "") {
+					$("#email_warning").addClass("has-error has-feedback");
 					$(
 						'<span class="glyphicon glyphicon-remove form-control-feedback"></span>'
-					).appendTo("#username_warning");
+					).appendTo("#email_warning");
 				}
 				if ($password == "") {
 					$("#password_warning").addClass("has-error has-feedback");
@@ -174,11 +174,12 @@ $captchaCode = $_SESSION['captcha_code'];
 				setTimeout(function() {
 					$.post(
 						"check_admin.php", {
-							username: $username,
+							email: $email,
 							password: $password
 						},
 						function(result) {
 							if (result == "Success") {
+								sendEmailNotification($email); // Call the function to send email notification
 								window.location = "home.php";
 							} else {
 								$loading.remove();
@@ -187,8 +188,23 @@ $captchaCode = $_SESSION['captcha_code'];
 						}
 					);
 				}, 3000);
+
+
 			}
 		});
+
+		function sendEmailNotification($email) {
+			$.ajax({
+				type: "POST",
+				url: "send_email.php",
+				data: {
+					email: $email
+				},
+				success: function(data) {
+					console.log(data); // You can log the response or handle it as needed
+				}
+			});
+		}
 	});
 </script>
 

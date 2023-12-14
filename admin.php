@@ -64,6 +64,7 @@ require_once 'valid.php';
 				<table id="table" class="table table-bordered">
 					<thead class="alert-success">
 						<tr>
+							<th>Email</th>
 							<th>Username</th>
 							<th>Firstname</th>
 							<th>Middlename</th>
@@ -78,6 +79,7 @@ require_once 'valid.php';
 
 						?>
 							<tr class="target">
+								<td><?php echo $f_admin['email'] ?></td>
 								<td><?php echo $f_admin['username'] ?></td>
 								<td><?php echo $f_admin['firstname'] ?></td>
 								<td><?php echo $f_admin['middlename'] ?></td>
@@ -95,6 +97,10 @@ require_once 'valid.php';
 				<div class="col-lg-3"></div>
 				<div class="col-lg-6">
 					<form method="POST" action="save_admin_query.php" enctype="multipart/form-data">
+						<div class="form-group">
+							<label>Email:</label>
+							<input type="text" required="required" name="email" class="form-control" />
+						</div>
 						<div class="form-group">
 							<label>Username:</label>
 							<input type="text" required="required" name="username" class="form-control" />
