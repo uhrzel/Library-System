@@ -26,7 +26,7 @@ FIRST Download
 
 7.Run the script http://localhost/librarysystem
 
-Username: admin
-Password: admin
+Email: sample@gmail.com
+Password: 123
 
 
