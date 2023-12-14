@@ -12,13 +12,17 @@ FIRST Download
 
 5. Extract the file and copy "librarysystem" folder
 
-6.Paste inside root directory/ where you install xammp local disk C: drive D: drive E: paste: (for xampp/htdocs, 
+6.Paste inside root directory/ where you install xammp local disk C: drive D: drive E: paste: (for xampp/htdocs)
 
 7. Open PHPMyAdmin (http://localhost/phpmyadmin)
 
 8. Create a database with name db_ls
 
 6. Import db_ls.sql file(given inside the zip package in SQL file folder)
+
+7. Create account in (https://ipinfo.io/) and get your Access Token in token navigation
+
+8. Please replace your .env.example to .env and paste your Access Token  in `IPINFO_API_KEY` variable
 
 7.Run the script http://localhost/librarysystem
 

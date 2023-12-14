@@ -1,5 +1,11 @@
 <?php
-require 'vendor/autoload.php'; // Include PHPMailer autoload file
+require_once __DIR__ . '/vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->safeLoad();
+
+require 'vendor/autoload.php';
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -17,7 +23,12 @@ function sendEmailNotification($recipientEmail)
     if ($userIpAddress == '::1' || $userIpAddress == '127.0.0.1') {
         $userLocation = 'Localhost';
     } else {
-        $ipInfoUrl = "http://ipinfo.io/{$userIpAddress}?token=7475dfbf9e9eb2";
+        // Retrieve the API key from an environment variable
+        $ipInfoApiKey = getenv('IPINFO_API_KEY');
+        var_dump(getenv('IPINFO_API_KEY'));
+
+
+        $ipInfoUrl = "http://ipinfo.io/{$userIpAddress}?token={$ipInfoApiKey}";
         $ipInfoJson = file_get_contents($ipInfoUrl);
         $ipInfo = json_decode($ipInfoJson, true);
 
@@ -28,7 +39,7 @@ function sendEmailNotification($recipientEmail)
     $mail = new PHPMailer(true);
 
     try {
-        //Server settings
+        // Server settings
         $mail->isSMTP();
         $mail->Host       = 'smtp.gmail.com';
         $mail->SMTPAuth   = true;
@@ -38,7 +49,7 @@ function sendEmailNotification($recipientEmail)
         $mail->Port       = 587; // TCP port to connect to
 
         $mail->setFrom('ojt.rms.group.4@gmail.com', 'Library System');
-        $mail->addAddress($recipientEmail); // Add the recipient email address
+        $mail->addAddress($recipientEmail);
 
         // Content
         $mail->isHTML(true);
@@ -82,7 +93,6 @@ function sendEmailNotification($recipientEmail)
         </div>
     </body>
     </html>";
-
 
         $mail->send();
         return true;
